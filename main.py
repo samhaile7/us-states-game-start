@@ -10,13 +10,12 @@ game_is_on = True
 counter = 0
 while game_is_on:
     answer = screen.textinput(title= f"{counter}/50 Guess the state!", prompt= "What's the state name?")
-    #print(answer)
 
     data = pandas.read_csv("50_states.csv")
 
-    #print(data)
+
     state_list = data['state'].to_list()
-    #print(state_list)
+
     for state in state_list:
         if answer == state:
             row = data[data.state == answer]
@@ -32,12 +31,8 @@ while game_is_on:
             map_label.goto(map_coordinates)
             map_label.write(f"{state}")
 
-        elif answer == "done":
+        elif answer == "done" or counter == 50:
 
             game_is_on = False
 
 
-
-#
-# print(row)
-#
