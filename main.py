@@ -8,6 +8,7 @@ screen.addshape(img)
 turtle.shape(img)
 game_is_on = True
 counter = 0
+correct_guess_list = []
 while game_is_on:
     answer = screen.textinput(title= f"{counter}/50 Guess the state!", prompt= "What's the state name?")
 
@@ -18,6 +19,7 @@ while game_is_on:
 
     for state in state_list:
         if answer == state:
+            correct_guess_list.append(state)
             row = data[data.state == answer]
             xcor = int(row.x)
             ycor = int(row.y)
@@ -35,4 +37,13 @@ while game_is_on:
 
             game_is_on = False
 
+need_to_learn = []
+for each in state_list:
+    if each not in correct_guess_list:
+        need_to_learn.append(each)
+    else:
+        continue
+dict = {"to study": need_to_learn}
+df = pandas.DataFrame(dict)
+df.to_csv("Needtolearn.csv")
 
