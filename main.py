@@ -6,20 +6,36 @@ screen.title('U.S. States Game')
 img = "blank_states_img.gif"
 screen.addshape(img)
 turtle.shape(img)
-
+game_is_on = True
 while game_is_on:
     answer = screen.textinput(title= "Guess the state!", prompt= "What's the state name?")
-    print(answer)
+    #print(answer)
 
     data = pandas.read_csv("50_states.csv")
-    print(data)
-    column_list = data['state'].to_list
-    for state in column_list:
+
+    #print(data)
+    state_list = data['state'].to_list()
+    #print(state_list)
+    for state in state_list:
         if answer == state:
             row = data[data.state == answer]
-            #Print name on map here
-        else:
-            print('try again')
+            xcor = int(row.x)
+            ycor = int(row.y)
+            map_coordinates = (xcor,ycor)
 
-print(row)
 
+            map_label = turtle.Turtle()
+            map_label.hideturtle()
+            map_label.penup()
+            map_label.goto(map_coordinates)
+            map_label.write(f"{state}")
+
+        elif answer == "done":
+            print('Game Over')
+            game_is_on = False
+
+
+
+#
+# print(row)
+#
