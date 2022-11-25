@@ -7,8 +7,9 @@ img = "blank_states_img.gif"
 screen.addshape(img)
 turtle.shape(img)
 game_is_on = True
+counter = 0
 while game_is_on:
-    answer = screen.textinput(title= "Guess the state!", prompt= "What's the state name?")
+    answer = screen.textinput(title= f"{counter}/50 Guess the state!", prompt= "What's the state name?")
     #print(answer)
 
     data = pandas.read_csv("50_states.csv")
@@ -22,6 +23,7 @@ while game_is_on:
             xcor = int(row.x)
             ycor = int(row.y)
             map_coordinates = (xcor,ycor)
+            counter += 1
 
 
             map_label = turtle.Turtle()
@@ -31,7 +33,7 @@ while game_is_on:
             map_label.write(f"{state}")
 
         elif answer == "done":
-            print('Game Over')
+
             game_is_on = False
 
 
